@@ -56,7 +56,7 @@
     
     <div id="mobile-menu" class="hidden md:hidden px-4 pb-4">
         <a href="{{ path('app_homepage') }}" class="block py-2 text-gray-700">Home</a>
-        <a href="#" class="block py-2 text-gray-700">Mes Blogs</a>
+        <a href="{{ path('app_my_posts')}}" class="block py-2 text-gray-700">My Blogs</a>
 
         {% if is_granted('ROLE_ADMIN') %}
             <a href="#" class="block py-2 text-gray-700">Users</a>

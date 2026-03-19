@@ -33,10 +33,10 @@ class PostType extends AbstractType
             new Assert\NotBlank(['message' => 'Le contenu est obligatoire']),
         ],
     ])
-    ->add('published', CheckboxType::class, [
+    /* ->add('published', CheckboxType::class, [
         'required' => false,
         'label' => 'Publier',
-    ])
+    ]) */
     ->add('category', EntityType::class, [
         'class' => Category::class,
         'choice_label' => 'name',

@@ -34,6 +34,9 @@ class Post
     #[ORM\JoinColumn(nullable: false)]
     private ?Category $category = null;
 
+    #[ORM\Column]
+    private ?bool $rejected = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,6 +111,18 @@ class Post
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function isRejected(): ?bool
+    {
+        return $this->rejected;
+    }
+
+    public function setRejected(bool $rejected): static
+    {
+        $this->rejected = $rejected;
 
         return $this;
     }

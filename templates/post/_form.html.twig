@@ -1,33 +1,38 @@
-<div class="space-y-4">
+<div class="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow space-y-6">
 
     {{ form_start(form) }}
 
+        
         <div>
-            {{ form_label(form.title, null, {'label_attr': {'class': 'block text-gray-700 mb-1'}}) }}
+            {{ form_label(form.title, null, {'label_attr': {'class': 'block text-gray-700 mb-1 font-semibold'}}) }}
             {{ form_widget(form.title, {'attr': {'class': 'w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-400'}}) }}
             {{ form_errors(form.title) }}
         </div>
 
         <div>
-            {{ form_label(form.content, null, {'label_attr': {'class': 'block text-gray-700 mb-1'}}) }}
-            {{ form_widget(form.content, {'attr': {'class': 'w-full px-4 py-2 border rounded-lg h-40 focus:ring-2 focus:ring-blue-400'}}) }}
+            {{ form_label(form.content, null, {'label_attr': {'class': 'block text-gray-700 mb-1 font-semibold'}}) }}
+            {{ form_widget(form.content, {'attr': {'class': 'w-full px-4 py-3 border rounded-lg h-40 focus:ring-2 focus:ring-blue-400'}}) }}
             {{ form_errors(form.content) }}
         </div>
 
+       
         <div>
-            {{ form_label(form.category, null, {'label_attr': {'class': 'block text-gray-700 mb-1'}}) }}
+            {{ form_label(form.category, null, {'label_attr': {'class': 'block text-gray-700 mb-1 font-semibold'}}) }}
             {{ form_widget(form.category, {'attr': {'class': 'w-full px-4 py-2 border rounded-lg'}}) }}
             {{ form_errors(form.category) }}
         </div>
 
-        <div class="flex items-center">
-            {{ form_widget(form.published, {'attr': {'class': 'mr-2'}}) }}
-            {{ form_label(form.published) }}
-        </div>
+       
+        <div class="flex space-x-4 mt-4">
+            <button type="submit" class="flex-1 bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
+                {{ button_label|default('Save') }}
+            </button>
 
-        <button class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
-            {{ button_label|default('Save') }}
-        </button>
+            <a href="{{ path('app_my_posts') }}" 
+               class="flex-1 bg-gray-200 text-gray-700 py-2 rounded-lg hover:bg-gray-300 transition text-center">
+               Cancel
+            </a>
+        </div>
 
     {{ form_end(form) }}
 

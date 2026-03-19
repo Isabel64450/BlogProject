@@ -40,15 +40,12 @@
                         <div class="flex justify-between items-center text-sm">
 
                            {% if post.published %}
-                            <span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-semibold">
-                                 Published
-                                   </span>
+                           <span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-semibold"> Published  </span>
+                           {% elseif post.rejected %}
+                           <span class="bg-red-100 text-red-700 text-xs px-3 py-1 rounded-full font-semibold"> Refused </span>
                            {% else %}
-                           <span class="bg-yellow-100 text-yellow-700 text-xs px-3 py-1 rounded-full font-semibold">
-                                   Pending
-                                </span>
-                            {% endif %}
-
+                            <span class="bg-yellow-100 text-yellow-700 text-xs px-3 py-1 rounded-full font-semibold"> Pending </span>
+                           {% endif %}
                             <span class="text-gray-400">
                                 {{ post.createdAt|date('d/m/Y') }}
                             </span>
