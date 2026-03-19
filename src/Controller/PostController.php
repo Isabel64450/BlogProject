@@ -74,6 +74,16 @@ public function edit(Post $post, Request $request, EntityManagerInterface $em): 
 }
 
 
+#[Route('/post/{id}', name: 'app_post_show')]
+public function show(Post $post): Response
+{
+    return $this->render('post/show.html.twig', [
+        'post' => $post,
+    ]);
+}
+
+
+
 #[Route('/my-posts', name: 'app_my_posts')]
 public function myPosts(PostRepository $postRepository, Security $security): Response
 {

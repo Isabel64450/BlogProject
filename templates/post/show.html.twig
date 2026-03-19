@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+
+<div class="max-w-4xl mx-auto px-6 py-12">
+
+    <h1 class="text-3xl font-bold mb-6">
+        {{ post.title }}
+    </h1>
+
+    <div class="text-sm text-gray-500 mb-6">
+        Published on {{ post.createdAt|date('d/m/Y') }}
+    </div>
+
+    {% if post.published %}
+        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">
+            Published
+        </span>
+    {% elseif post.rejected %}
+        <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold">
+            Refused
+        </span>
+    {% else %}
+        <span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold">
+            Pending
+        </span>
+    {% endif %}
+
+    <div class="mt-8 text-gray-700 leading-relaxed">
+        {{ post.content }}
+    </div>
+    <div class="mt-6">
+        <a href="{{ app.request.headers.get('referer') ?? path('app_post') }}"
+           class="bg-gray-600 text-white px-4 py-2 rounded hover:bg-gray-700 transition">
+           ← Back
+        </a>
+    </div>
+    {% if is_granted('ROLE_ADMIN') %}
+    <div class="flex space-x-2 mt-6">
+
+        {% if not post.published %}
+            <a href="{{ path('admin_post_approve', {id: post.id}) }}"
+               class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">Validate </a>
+        {% endif %}
+
+        {% if not post.rejected %}
+            <a href="{{ path('admin_post_reject', {id: post.id}) }}"
+               class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition"> Reject </a>
+        {% endif %}
+
+        
+
+    </div>
+{% endif %}
+</div>
+
+{% endblock %}

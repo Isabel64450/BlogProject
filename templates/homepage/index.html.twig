@@ -16,17 +16,10 @@
                 Discover articles, tips and news about web development, tech and more.
             </p>
 
-            <form class="max-w-xl mx-auto flex">
-                <input 
-                    type="text" 
-                    placeholder="search an article..."
-                    class="w-full px-4 py-3 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                >
-                <button 
-                    class="bg-blue-600 text-white px-6 py-3 rounded-r-lg hover:bg-blue-700 transition"
-                >
-                    Search
-                </button>
+            <form class="max-w-xl mx-auto flex" action="{{ path('homepage_search') }}" method="get">
+                <input type="text" name="q" placeholder="search an article..."
+                 class="w-full px-4 py-3 border rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-r-lg hover:bg-blue-700 transition">Search</button>
             </form>
         </div>
     </section>
@@ -52,7 +45,7 @@
                     {{ post.content|slice(0, 120) }}...
                 </p>
 
-                <a href="#{# {{ path('app_post_show', {id: post.id}) }} #}"
+                <a href=" {{ path('app_post_show', {id: post.id}) }} "
                    class="text-blue-600 font-medium hover:underline">
                     Read more →
                 </a>
@@ -79,17 +72,18 @@
         </h2>
 
         <div class="flex flex-wrap gap-4">
-             {% for category in categories %}
-         <span class="px-4 py-2 rounded-full font-semibold text-white shadow-sm 
-                     hover:brightness-110 transition duration-200 cursor-pointer"
-              style="background-color: {{ category.color }}">
-            {{ category.name }}
-         </span>
-             {% endfor %}
+            {% for category in categories %}
+                <a href="{{ path('homepage_category', {id: category.id}) }}"
+                   class="px-4 py-2 rounded-full font-semibold text-white shadow-sm 
+                          hover:brightness-110 transition duration-200 cursor-pointer
+                          {% if selectedCategory is defined and selectedCategory.id == category.id %}ring-4 ring-black/50{% endif %}"
+                   style="background-color: {{ category.color }}">
+                    {{ category.name }}
+                </a>
+            {% endfor %}
         </div>
     </div>
 </section>
-
 </div>
 
 {% endblock %}
