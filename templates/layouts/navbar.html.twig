@@ -1,0 +1,78 @@
+<nav class="bg-white shadow-md">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center h-16">
+
+           
+            <a href="{{ path('app_homepage') }}" class="text-xl font-bold text-blue-600">Yours Blogs </a>
+
+            <div class="hidden md:flex items-center space-x-6">
+
+                                
+                 {% if app.user %}
+                    <a href="{{ path('app_my_posts') }}" class="text-gray-700 hover:text-blue-500">  My Blogs   </a>
+                {% endif %}
+
+                {% if is_granted('ROLE_ADMIN') %}
+                 <a href="{{ path('admin_posts') }}"> Admin Review </a>
+        <a href="{{ path('app_post_new') }}"
+           class="block px-4 py-2 hover:bg-gray-100">
+            New Blog
+        </a>
+
+        <a href="{{ path('app_category') }}"
+           class="block px-4 py-2 hover:bg-gray-100">
+            Categories
+        </a>
+
+        <a href="{{ path('app_user') }}"
+           class="block px-4 py-2 hover:bg-gray-100">
+            Users
+        </a>
+
+    
+                {% endif %}
+
+                {% if app.user %}
+                    <span class="text-gray-600 text-sm">
+                        {{ app.user.userIdentifier }}
+                    </span>
+
+                    <a href="{{ path('app_logout') }}" class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">Logout  </a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="text-gray-700 hover:text-blue-500"> Login  </a>
+
+                    <a href="{{ path('app_register') }}" class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">  Register  </a>
+                {% endif %}
+
+            </div>
+
+            
+            <button id="menu-btn" class="md:hidden text-gray-700 focus:outline-none">
+                ☰
+            </button>
+        </div>
+    </div>
+
+    
+    <div id="mobile-menu" class="hidden md:hidden px-4 pb-4">
+        <a href="{{ path('app_homepage') }}" class="block py-2 text-gray-700">Home</a>
+        <a href="#" class="block py-2 text-gray-700">Mes Blogs</a>
+
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="#" class="block py-2 text-gray-700">Users</a>
+        {% endif %}
+
+        {% if app.user %}
+            <a href="{{ path('app_logout') }}" class="block py-2 text-red-500">Logout</a>
+        {% else %}
+            <a href="{{ path('app_login') }}" class="block py-2">Login</a>
+            <a href="{{ path('app_register') }}" class="block py-2">Register</a>
+        {% endif %}
+    </div>
+</nav>
+
+<script>
+document.getElementById('menu-btn').addEventListener('click', function () {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+});
+</script>

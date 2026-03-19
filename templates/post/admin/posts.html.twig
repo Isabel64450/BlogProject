@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Review Posts{% endblock %}
+
+{% block body %}
+
+<div class="max-w-6xl mx-auto px-6 py-12">
+
+    <h1 class="text-3xl font-bold mb-10"> Posts pending validation </h1>
+
+    {% if posts is empty %}
+
+        <p class="text-gray-500"> No post to validate  </p>
+
+    {% else %}
+
+        <div class="space-y-6">
+
+            {% for post in posts %}
+
+                <div class="bg-white p-6 rounded-xl shadow">
+
+                    <h2 class="text-xl font-semibold mb-2">
+                        {{ post.title }}
+                    </h2>
+
+                    <p class="text-gray-600 mb-4">
+                        {{ post.content|slice(0, 200) }}...
+                    </p>
+                      <div class="flex space-x-2"> 
+                             <a href=" {{ path('admin_post_approve', {id: post.id}) }} "
+                       class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+                        Validate
+                    </a>
+                     <a href="#{# {{ path('admin_post_reject', {id: post.id}) }} #}"
+                      class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
+                         Reject
+                     </a>
+
+                     <a href="#{# {{ path('admin_post_show', {id: post.id}) }} #}"
+                      class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                           Read more
+                      </a>
+
+                    <a href="#{# {{ path('admin_post_edit', {id: post.id}) }} #}"
+                     class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition">
+                      edit
+                     </a>
+                      </div>
+                   
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

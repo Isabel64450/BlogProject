@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}My Blogs{% endblock %}
+
+{% block body %}
+
+<div class="max-w-6xl mx-auto px-6 py-12">
+
+    <div class="flex justify-between items-center mb-10">
+        <h1 class="text-3xl font-bold"> My Blogs  </h1>
+
+        <a href="{{ path('app_post_new') }}"
+           class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
+            New article
+        </a>
+    </div>
+
+    {% if posts is empty %}
+
+        <div class="bg-gray-100 p-6 rounded-lg text-gray-600"> You haven’t created any article yet. </div>
+
+    {% else %}
+
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+
+            {% for post in posts %}
+
+                <article class="bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+
+                    <div class="p-6">
+
+                        <h2 class="text-xl font-semibold mb-3">
+                            {{ post.title }}
+                        </h2>
+
+                        <p class="text-gray-600 mb-4">
+                            {{ post.content|slice(0, 120) }}...
+                        </p>
+
+                        <div class="flex justify-between items-center text-sm">
+
+                           {% if post.published %}
+                            <span class="bg-green-100 text-green-700 text-xs px-3 py-1 rounded-full font-semibold">
+                                 Published
+                                   </span>
+                           {% else %}
+                           <span class="bg-yellow-100 text-yellow-700 text-xs px-3 py-1 rounded-full font-semibold">
+                                   Pending
+                                </span>
+                            {% endif %}
+
+                            <span class="text-gray-400">
+                                {{ post.createdAt|date('d/m/Y') }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

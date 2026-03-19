@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories{% endblock %}
+
+{% block body %}
+<div class="min-h-screen bg-gray-100 py-10">
+
+    <div class="container mx-auto px-4">
+
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">
+                 Catégories
+            </h1>
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('app_category_new') }}"
+                   class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
+                    + Ajouter
+                </a>
+            {% endif %}
+        </div>
+
+        {% if categories is empty %}
+            <div class="bg-white p-6 rounded-xl shadow text-center text-gray-600">
+                Aucune catégorie disponible.
+            </div>
+        {% else %}
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                {% for category in categories %}
+
+                    <div class="bg-white p-6 rounded-2xl shadow hover:shadow-lg transition">
+
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">
+                            {{ category.name }}
+                        </h2>
+
+                        <div class="flex justify-between items-center">
+
+                            <span class="text-sm text-gray-500">
+                                {{ category.posts|length }} articles
+                            </span>
+
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <a href="{{ path('app_category_edit', {'id': category.id}) }}"
+                                   class="text-blue-500 hover:underline text-sm">
+                                    Modifier
+                                </a>
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+{% endblock %}

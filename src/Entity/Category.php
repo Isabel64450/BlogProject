@@ -19,7 +19,7 @@ class Category
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $color = null;
+    private ?string $color = '#007bff';
 
     /**
      * @var Collection<int, Post>

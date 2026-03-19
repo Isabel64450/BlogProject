@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use App\Entity\User;
 use App\Repository\PostRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -21,13 +21,14 @@ class Post
     private ?string $content = null;
 
     #[ORM\Column]
-    private ?bool $published = null;
+    private ?bool $published = false;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $author = null;
+    #[ORM\ManyToOne(inversedBy: 'posts')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
+   
 
     #[ORM\ManyToOne(inversedBy: 'posts')]
     #[ORM\JoinColumn(nullable: false)]
@@ -86,18 +87,19 @@ class Post
         return $this;
     }
 
-    public function getAuthor(): ?string
+    
+    
+    public function getAuthor(): ?User
     {
-        return $this->author;
+    return $this->author;
     }
 
-    public function setAuthor(string $author): static
+    public function setAuthor(?User $author): static
     {
-        $this->author = $author;
+    $this->author = $author;
 
-        return $this;
+    return $this;
     }
-
     public function getCategory(): ?Category
     {
         return $this->category;
